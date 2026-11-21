@@ -3,7 +3,7 @@
 // Never put a service_role key or other secret in frontend code.
 window.MYJOYPH = {
   SUPABASE_URL: "https://wfuokohhwnvoeibumhdw.supabase.co",
-  SUPABASE_ANON_KEY: "sb_publishable_VG9Lmf3pOice53VJrKykA_YDJJLvuo",
+  SUPABASE_ANON_KEY: "sb_publishable_VG9Lmf3pOiceV53rJfKykA_YJDJLvuo",
   STORAGE_BUCKET: "myjoyph-menu-photos",
   BUSINESS_ADDRESS: "ADD YOUR COMPLETE BUSINESS ADDRESS",
   FACEBOOK_URL: "ADD YOUR FACEBOOK PAGE URL",
