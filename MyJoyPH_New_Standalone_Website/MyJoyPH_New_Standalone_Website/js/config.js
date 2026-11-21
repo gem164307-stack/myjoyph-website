@@ -6,7 +6,7 @@ window.MYJOYPH = {
   SUPABASE_ANON_KEY: "sb_publishable_VG9Lmf3pOiceV53rJfKykA_YJDJLvuo",
   STORAGE_BUCKET: "myjoyph-menu-photos",
   BUSINESS_ADDRESS: "ADD YOUR COMPLETE BUSINESS ADDRESS",
-  FACEBOOK_URL: "ADD YOUR FACEBOOK PAGE URL",
+  FACEBOOK_URL: "ADD YOUR FACEBOOK PAGE URL", 
   CURRENCY: "PHP"
 };
 window.myjoyDb = window.supabase?.createClient(
