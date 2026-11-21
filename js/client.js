@@ -49,8 +49,8 @@ const mapsUrl =
 
 document.getElementById("directions").href = mapsUrl;
 document.getElementById("mapMore").href = mapsUrl;
-*/
 
+*/
 
 
 (() => {
