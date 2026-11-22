@@ -7,3 +7,50 @@
   border-radius: 8px;
   display: block;
 }
+
+
+/* MyJoyPH customer-facing pink, yellow and white refresh.
+   Admin dashboard styles above intentionally remain unchanged. */
+body:not(.admin-page){--ink:#48263b;--muted:#876b7b;--cream:#fff3f7;--paper:#fffdfd;--orange:#df4d91;--gold:#ffd65a;--line:#f3dce7;--green:#427653;background:var(--paper)}
+body:not(.admin-page) .topbar{background:#fffdfd;border-bottom-color:#f4dce7;box-shadow:0 5px 24px #7b34500b}
+body:not(.admin-page) .logo>span:last-child>span{color:#df4d91}
+body:not(.admin-page) .topbar nav a:hover,body:not(.admin-page) footer>a:hover{color:#df4d91}
+body:not(.admin-page) .hero{background:radial-gradient(circle at 8% 8%,#ffe2ed 0,transparent 32%),linear-gradient(115deg,#fff3f7 0%,#fff9e9 100%);padding-top:66px;padding-bottom:74px;min-height:610px}
+body:not(.admin-page) h1 i,body:not(.admin-page) h2 i{color:#df4d91}
+body:not(.admin-page) .kicker{color:#d84489}
+body:not(.admin-page) .btn.dark{background:#48263b}
+body:not(.admin-page) .btn.dark:hover{background:#df4d91}
+body:not(.admin-page) .hero-foot>span{background:#fff0b9;color:#c77b16}
+body:not(.admin-page) .category.active,body:not(.admin-page) .category:hover{background:#df4d91;border-color:#df4d91}
+body:not(.admin-page) .dish{border-color:#f3dce7;box-shadow:0 8px 25px #8a3d5b08}
+body:not(.admin-page) .dish:hover{box-shadow:0 16px 34px #8a3d5b18}
+body:not(.admin-page) .dish-info>b{color:#d84489}
+body:not(.admin-page) .story{background:linear-gradient(110deg,#fff0f5,#fff8df)}
+body:not(.admin-page) .story-icon{color:#df4d91}
+body:not(.admin-page) .location-card{background:radial-gradient(circle at 20% 30%,#f7d7e5 0 2px,transparent 3px),linear-gradient(135deg,#fff0f5,#fff5d9);background-size:42px 42px,auto}
+body:not(.admin-page) .location-card .pin,body:not(.admin-page) .location-card a{color:#d84489}
+body:not(.admin-page) footer{background:#fffafd;border-top-color:#f3dce7}
+body:not(.admin-page) .best-seller-hero{width:100%;max-width:530px;margin:auto;transform:none}
+.best-seller-heading{display:flex;align-items:center;justify-content:space-between;margin:0 0 13px;gap:12px}
+.best-seller-live{background:#ffe16b;color:#59334a;border-radius:30px;padding:8px 12px;font-size:9px;font-weight:900;letter-spacing:1px}
+.best-seller-card{overflow:hidden;background:#fff;border:1px solid #f2d8e4;border-radius:28px;box-shadow:0 24px 60px #9b46651c;transform:none}
+.best-seller-photo{height:320px;position:relative;background:linear-gradient(135deg,#ffe7ef,#fff3c8);overflow:hidden}
+.best-seller-photo>img{display:block;width:100%;height:100%;object-fit:cover;opacity:1;transition:opacity .35s ease}
+.best-seller-photo>img.is-changing{opacity:.25}
+.best-seller-placeholder{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;color:#d84489;font-size:48px}
+.best-seller-placeholder span{font-size:12px;font-weight:700;color:#876b7b}
+.best-seller-ribbon{position:absolute;left:17px;top:17px;background:#ffe16b;color:#59334a;padding:9px 13px;border-radius:30px;font-size:9px;font-weight:900;letter-spacing:1px}
+.best-seller-info{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;padding:20px 22px 22px}
+.best-seller-category{font-size:9px;letter-spacing:1.7px;font-weight:900;color:#d84489}
+.best-seller-info h2{font:700 25px "Playfair Display",serif;letter-spacing:-.5px;margin:7px 0;color:#48263b}
+.best-seller-info p{font-size:11px;line-height:1.6;color:#876b7b;margin:0;max-width:280px}
+.best-seller-info>strong{white-space:nowrap;color:#d84489;font-size:15px;padding-top:17px}
+.best-seller-controls{display:flex;align-items:center;justify-content:space-between;margin:17px 2px 9px;color:#876b7b;font-size:10px;font-weight:700}
+.best-seller-controls>div{display:flex;gap:7px}
+.best-seller-controls button{width:34px;height:34px;border:1px solid #f0d5e2;border-radius:50%;background:#fff;color:#a43d70;font-size:16px;cursor:pointer}
+.best-seller-controls button:hover{background:#df4d91;color:#fff;border-color:#df4d91}
+.best-seller-progress{height:4px;border-radius:10px;background:#f5dfe9;overflow:hidden}
+.best-seller-progress span{display:block;width:0;height:100%;background:#df4d91;transform-origin:left}
+@media(max-width:800px){body:not(.admin-page) .hero{grid-template-columns:1fr;padding:54px 7% 65px;gap:38px}.best-seller-hero{width:min(100%,520px)}.best-seller-photo{height:300px}}
+@media(max-width:560px){body:not(.admin-page) .hero{padding-top:43px}.best-seller-photo{height:245px}.best-seller-info{padding:17px;gap:9px}.best-seller-info h2{font-size:21px}.best-seller-info p{font-size:10px}.best-seller-info>strong{font-size:13px}.best-seller-live{font-size:8px;padding:7px 9px}}
+@media(prefers-reduced-motion:reduce){.best-seller-photo>img{transition:none}}
