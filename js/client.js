@@ -248,7 +248,7 @@ document.getElementById("mapMore").href = mapsUrl;
 
     const { data, error } = await myjoyDb
       .from("menu_items")
-      .select("id,name,description,price,category,image_url,is_available")
+      .select("id,name,description,price,category,image_url,is_available,is_best_seller")
       .eq("is_available", true)
       .order("created_at", { ascending: false });
 
