@@ -2,7 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#fff8ef">
+  <meta name="theme-color" content="#fff4f8">
+  <meta name="description" content="Discover MyJoyPH at Ayala Center Cebu. Explore our food menu, customer favorites, and visit us today.">
+  <meta name="keywords" content="MyJoyPH, food in Cebu, Ayala Center Cebu food, MyJoy menu">
+  <meta name="robots" content="index, follow">
   <title>MyJoy — Food worth sharing</title>
   
   <!--<meta name="description"
@@ -36,7 +39,15 @@ content="MyJoyPH, food in Cebu, Ayala Center Cebu food, MyJoy menu">
       <div class="hero-buttons"><a class="btn dark" href="#menu">Explore our menu <b>→</b></a><a class="underlink" href="#visit">Where to find us</a></div>
       <div class="hero-foot"><span>✳</span><div><b>Made for sharing</b><small>See our latest food and prices</small></div></div>
     </div>
-    <div class="hero-visual"><img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=1200&q=85" alt="Fresh colorful food"><div class="round-stamp">GOOD<br>MOOD<br><strong>FOOD ♥</strong></div><div class="photo-label">FRESH BITES, BRIGHT DAYS</div></div>
+    <div class="hero-visual best-seller-hero" aria-label="MyJoy best sellers">
+      <div class="best-seller-heading"><span class="kicker">CUSTOMER FAVORITES</span><span class="best-seller-live">BEST SELLERS</span></div>
+      <article class="best-seller-card" aria-live="polite">
+        <div class="best-seller-photo"><img id="bestSellerImage" src="" alt="" loading="eager"><div id="bestSellerPlaceholder" class="best-seller-placeholder">✳<span>Our best sellers are coming soon</span></div><span class="best-seller-ribbon">MYJOY FAVORITE</span></div>
+        <div class="best-seller-info"><div><span id="bestSellerCategory" class="best-seller-category">BEST SELLER</span><h2 id="bestSellerName">Discover our favorites</h2><p id="bestSellerDescription">Our team’s favorite dishes, made with joy.</p></div><strong id="bestSellerPrice"></strong></div>
+      </article>
+      <div class="best-seller-controls"><span id="bestSellerCount">No featured dishes yet</span><div><button id="bestSellerPrev" type="button" aria-label="Previous best seller">←</button><button id="bestSellerNext" type="button" aria-label="Next best seller">→</button></div></div>
+      <div class="best-seller-progress" aria-hidden="true"><span id="bestSellerProgress"></span></div>
+    </div>
   </section>
   <section class="menu-area wrap" id="menu">
     <div class="section-top"><div><span class="kicker">TAKE A LOOK</span><h2>Find your <i>favorite.</i></h2></div><p>Delicious choices, clear prices, and a little joy in every order.</p></div>
