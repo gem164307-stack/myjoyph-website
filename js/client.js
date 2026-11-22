@@ -107,7 +107,6 @@ document.getElementById("mapMore").href = mapsUrl;
     if (!bestSellers.length) {
       image.removeAttribute("src");
       image.alt = "";
-      image.classList.remove("is-changing");
       image.hidden = true;
       placeholder.hidden = false;
       $("bestSellerName").textContent = "Discover our favorites";
@@ -118,36 +117,34 @@ document.getElementById("mapMore").href = mapsUrl;
       $("bestSellerProgress").style.width = "0%";
       return;
     }
+
     bestSellerIndex = (index + bestSellers.length) % bestSellers.length;
     const item = bestSellers[bestSellerIndex];
+    $("bestSellerName").textContent = item.name;
+    $("bestSellerCategory").textContent = item.category || "BEST SELLER";
+    $("bestSellerDescription").textContent = item.description || "A MyJoyPH favorite, made with joy.";
+    $("bestSellerPrice").textContent = price(item.price);
+    $("bestSellerCount").textContent = `FEATURED ${bestSellerIndex + 1} / ${bestSellers.length}`;
+
+    if (!item.image_url) {
+      image.removeAttribute("src");
+      image.hidden = true;
+      placeholder.hidden = false;
+      return;
+    }
+
     image.classList.add("is-changing");
-    const applyImage = () => {
-      if (item.image_url) {
-        image.src = item.image_url;
-        image.alt = item.name;
-        image.hidden = false;
-        placeholder.hidden = true;
-      } else {
-        image.removeAttribute("src");
-        image.hidden = true;
-        placeholder.hidden = false;
-      }
-      $("bestSellerName").textContent = item.name;
-      $("bestSellerCategory").textContent = item.category || "BEST SELLER";
-      $("bestSellerDescription").textContent = item.description || "A MyJoyPH favorite, made with joy.";
-      $("bestSellerPrice").textContent = price(item.price);
-      $("bestSellerCount").textContent = `FEATURED ${bestSellerIndex + 1} / ${bestSellers.length}`;
+    image.onload = () => {
+      image.hidden = false;
+      placeholder.hidden = true;
       window.setTimeout(() => image.classList.remove("is-changing"), 80);
     };
-    if (item.image_url) {
-      image.onload = applyImage;
-      image.onerror = () => {
-        image.hidden = true;
-        placeholder.hidden = false;
-        placeholder.querySelector("span").textContent = "Photo temporarily unavailable";
-        applyImage();
-      };
-    } else applyImage();
+    image.onerror = () => {
+      image.hidden = true;
+      placeholder.hidden = false;
+      placeholder.querySelector("span").textContent = "Photo temporarily unavailable";
+    };
+    image.src = item.image_url;
   }
 
   function stopBestSellerRotation() {
