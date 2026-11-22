@@ -20,7 +20,7 @@ $("categories").addEventListener("click",e=>{const b=e.target.closest("[data-cat
 $("search").addEventListener("input",render);
 async function load(){
  if(!window.myjoyDb){$("menuGrid").innerHTML='<p class="status">Supabase client did not initialize. Check your configuration.</p>';return;}
- const {data,error}=await myjoyDb.from("menu_items").select("id,name,description,price,category,image_url,is_available").eq("is_available",true).order("created_at",{ascending:false});
+ const {data,error}=await myjoyDb.from("menu_items").select("id,name,description,price,category,image_url,is_available,is_best_seller").eq("is_available",true).order("created_at",{ascending:false});
  if(error){console.error(error);$("menuGrid").innerHTML='<p class="status">Menu setup is not complete yet. Follow SETUP.md to create the database tables.</p>';return;}
  menu=data||[];renderCats();render();if(!menu.length)$("menuStatus").textContent="Our menu is being updated. Please check back soon.";
 }
@@ -98,6 +98,93 @@ document.getElementById("mapMore").href = mapsUrl;
   }).format(Number(n) || 0);
 
   let menu = [], category = "all";
+  let bestSellers = [], bestSellerIndex = 0, bestSellerTimer = null, progressTimer = null;
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  function showBestSeller(index) {
+    const image = $("bestSellerImage");
+    const placeholder = $("bestSellerPlaceholder");
+    if (!bestSellers.length) {
+      image.removeAttribute("src");
+      image.alt = "";
+      image.classList.remove("is-changing");
+      image.hidden = true;
+      placeholder.hidden = false;
+      $("bestSellerName").textContent = "Discover our favorites";
+      $("bestSellerCategory").textContent = "BEST SELLER";
+      $("bestSellerDescription").textContent = "Our team’s favorite dishes, made with joy.";
+      $("bestSellerPrice").textContent = "";
+      $("bestSellerCount").textContent = "No featured dishes yet";
+      $("bestSellerProgress").style.width = "0%";
+      return;
+    }
+    bestSellerIndex = (index + bestSellers.length) % bestSellers.length;
+    const item = bestSellers[bestSellerIndex];
+    image.classList.add("is-changing");
+    const applyImage = () => {
+      if (item.image_url) {
+        image.src = item.image_url;
+        image.alt = item.name;
+        image.hidden = false;
+        placeholder.hidden = true;
+      } else {
+        image.removeAttribute("src");
+        image.hidden = true;
+        placeholder.hidden = false;
+      }
+      $("bestSellerName").textContent = item.name;
+      $("bestSellerCategory").textContent = item.category || "BEST SELLER";
+      $("bestSellerDescription").textContent = item.description || "A MyJoyPH favorite, made with joy.";
+      $("bestSellerPrice").textContent = price(item.price);
+      $("bestSellerCount").textContent = `FEATURED ${bestSellerIndex + 1} / ${bestSellers.length}`;
+      window.setTimeout(() => image.classList.remove("is-changing"), 80);
+    };
+    if (item.image_url) {
+      image.onload = applyImage;
+      image.onerror = () => {
+        image.hidden = true;
+        placeholder.hidden = false;
+        placeholder.querySelector("span").textContent = "Photo temporarily unavailable";
+        applyImage();
+      };
+    } else applyImage();
+  }
+
+  function stopBestSellerRotation() {
+    if (bestSellerTimer) window.clearInterval(bestSellerTimer);
+    if (progressTimer) window.clearInterval(progressTimer);
+    bestSellerTimer = null;
+    progressTimer = null;
+  }
+
+  function startBestSellerRotation() {
+    stopBestSellerRotation();
+    if (bestSellers.length < 2 || reducedMotion || document.hidden) return;
+    let elapsed = 0;
+    $("bestSellerProgress").style.width = "0%";
+    progressTimer = window.setInterval(() => {
+      elapsed += 100;
+      $("bestSellerProgress").style.width = Math.min(100, elapsed / 20) + "%";
+    }, 100);
+    bestSellerTimer = window.setInterval(() => {
+      elapsed = 0;
+      $("bestSellerProgress").style.width = "0%";
+      showBestSeller(bestSellerIndex + 1);
+    }, 2000);
+  }
+
+  $("bestSellerPrev").addEventListener("click", () => {
+    showBestSeller(bestSellerIndex - 1);
+    startBestSellerRotation();
+  });
+  $("bestSellerNext").addEventListener("click", () => {
+    showBestSeller(bestSellerIndex + 1);
+    startBestSellerRotation();
+  });
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) stopBestSellerRotation();
+    else startBestSellerRotation();
+  });
 
   function render() {
     const term = $("search").value.toLowerCase().trim();
@@ -176,6 +263,9 @@ document.getElementById("mapMore").href = mapsUrl;
     }
 
     menu = data || [];
+    bestSellers = menu.filter(item => item.is_best_seller);
+    showBestSeller(0);
+    startBestSellerRotation();
     renderCats();
     render();
 
